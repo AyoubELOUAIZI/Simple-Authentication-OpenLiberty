@@ -44,10 +44,10 @@ public class UserDao {
         return user;
     }
 
-    public void addUser(User user) throws SQLException {
+    public boolean addUser(User user) {
         Connection connection = null;
         PreparedStatement statement = null;
-
+    
         try {
             connection = DatabaseUtil.getConnection();
             String query = "INSERT INTO users (email, username, password) VALUES (?, ?, ?)";
@@ -55,17 +55,20 @@ public class UserDao {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getUsername());
             statement.setString(3, user.getPassword());
-
+    
             int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("A new user was inserted successfully!");
+            if(rowsInserted>0){
+                System.out.println("\n\n\n**the rows inserted-nice new user created\n\n");
             }
-        } finally {
-            // Close resources
-            if (statement != null) {
-                statement.close();
-            }
-            DatabaseUtil.closeConnection();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            // Handle SQLException appropriately, e.g., log it or throw a custom exception
+            System.out.println("\n\n\n***the rows not inserted-creating new user failed\n");
+
+            e.printStackTrace();
+            return false;
+        
         }
     }
+    
 }
