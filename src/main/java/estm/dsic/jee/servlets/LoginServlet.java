@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("page/dashboard");
             } else {
                 // Authentication failed, redirect to error page
-                response.sendRedirect("page/error");
+                response.sendRedirect("page/login");
             }
         } catch (SQLException e) {
             e.printStackTrace();
