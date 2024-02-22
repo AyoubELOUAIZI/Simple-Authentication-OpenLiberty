@@ -1,7 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="estm.dsic.jee.model.User" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="java.io.IOException" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="javax.servlet.ServletException" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +16,9 @@
     <h2>Welcome to Dashboard</h2>
     <% 
         HttpSession session = request.getSession(false); // Retrieve session without creating a new one
-        if (session != null) {
+       system.out.println("\n\n--------------------------------");
+       system.out.println("session = " + session);
+       if (session != null) {
             User user = (User) session.getAttribute("user");
             if (user != null) {
     %>
