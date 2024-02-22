@@ -19,12 +19,15 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
+        System.out.println("username: " + email);
+        System.out.println("password:"+password);
 
         UserDao userDao = new UserDao();
         try {
-            User user = userDao.getUserByUsernameAndPassword(username, password);
+            User user = userDao.getUserByEmailAndPassword(email, password);
+           System.out.println("\n\n\nuser: \n{" + user+"\n}");
             if (user != null) {
                 // User authenticated, set user session attribute
                 HttpSession session = request.getSession();

@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDao {
-    public User getUserByUsernameAndPassword(String username, String password) throws SQLException {
+    public User getUserByEmailAndPassword(String email, String password) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -16,9 +16,9 @@ public class UserDao {
 
         try {
             connection = DatabaseUtil.getConnection();
-            String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+            String query = "SELECT * FROM users WHERE email = ? AND password = ?";
             statement = connection.prepareStatement(query);
-            statement.setString(1, username);
+            statement.setString(1, email);
             statement.setString(2, password);
 
             resultSet = statement.executeQuery();
